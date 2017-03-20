@@ -1,0 +1,26 @@
+Q.1Explain the core changes made in Hadoop 2.x
+Ans.
+Hadoop 2.x provides an upgrade to Hadoop 1.x in terms of resource management, scheduling and the manner in which execution occurs.
+In Hadoop 2.x the cluster resource management capabilities work in isolation from the MapReduce specific programming logic.
+This helps Hadoop to share resources dynamically between multiple parallel processing frameworks like Impala and the core MapReduce
+component. Hadoop 2.x Hadoop 2.x allows workable and fine grained resource configuration leading to efficient and better cluster
+utilization so that the application can scale to process larger number of jobs.
+
+Q.2Explain the difference between MapReduce 1 and MapReduce 2 / Yarn
+Ans.
+Limitations of MapReduce 1.0 – Hadoop can scale up to 4,000 nodes. When it exceeds that limit, it raises unpredictable behavior
+such as cascading failures and serious deterioration of overall cluster. Another issue being multi-tenancy – it is impossible to 
+run other frameworks than MapReduce 1.0 on a Hadoop cluster.
+
+MapReduce 2.0 has two components – YARN that has cluster resource management capabilities and MapReduce.
+
+In MapReduce 2.0, the JobTracker is divided into three services:
+a)ResourceManager, a persistent YARN service that receives and runs applications on the cluster. A MapReduce job is an application.
+JobHistoryServer, to provide information about completed jobs Application Master, to manage each MapReduce job and is terminated 
+when the job completes. Also, the TaskTracker has been replaced with the NodeManager, a YARN service that manages resources and 
+deployment on a node. NodeManager is responsible for launching containers that could either be a map or reduce task.
+b)This new architecture breaks JobTracker model by allowing a new ResourceManager to manage resource usage across applications,
+with ApplicationMasters taking the responsibility of managing the execution of jobs. This change removes a bottleneck
+and lets Hadoop clusters scale up to larger configurations than 4000 nodes. This architecture also allows simultaneous execution 
+of a variety of programming models such as graph processing, iterative processing, machine learning, and general cluster computing, 
+including the traditional MapReduce.
